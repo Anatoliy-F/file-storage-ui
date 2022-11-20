@@ -1,7 +1,11 @@
 <header>
-    <nav>
-        <a [routerLink]="['/']">Home</a>
-        |
-        <a [routerLink]="['/myFiles']">Fetch Data</a>
-    </nav>
+    <mat-toolbar color="primary">
+        <button mat-icon-button [routerLink]="['/']">
+            <mat-icon>home</mat-icon>
+        </button>
+        <a mat-flat-button color="primary" [routerLink]="['/myFiles']">
+            Fetch files
+        </a>
+    </mat-toolbar>
 </header>
+

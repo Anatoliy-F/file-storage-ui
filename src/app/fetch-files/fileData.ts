@@ -3,5 +3,7 @@ export interface FileData{
     name: string;
     note: string;
     size: number;
-    uploadDT: string;
+    uploadDateTime: string;
+    isPublic: boolean;
+    shortLink?: string;
 }

@@ -6,4 +6,5 @@ export interface FileData{
     uploadDateTime: string;
     isPublic: boolean;
     shortLink?: string;
+    viewers: string[];
 }

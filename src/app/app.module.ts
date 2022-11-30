@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { FileDataComponent } from './fetch-files/file-data/file-data.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     UploadComponent,
     LoginComponent,
     RegistrationComponent,
+    FileDataComponent,
   ],
   imports: [
     BrowserModule,

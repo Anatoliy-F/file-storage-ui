@@ -53,4 +53,15 @@ import { FileData } from './fileData';
         return this.http.put<FileData>(url, item);
       }
 
+      delete(item: FileData): Observable<FileData>{
+        let url = this.getUrl("file/" + item.id);
+        return this.http.delete<FileData>(url, { body: item });
+      }
+
+      download(id: string): Observable<Blob>
+      {
+        let url = this.getUrl("file/download/" + id);
+        return this.http.get(url, {responseType: "blob"});
+      }
+
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
@@ -24,7 +25,8 @@ export class FileDataComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private fetchFilesService: FetchFilesService
+    private fetchFilesService: FetchFilesService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -41,9 +43,11 @@ export class FileDataComponent implements OnInit {
     if(this.id){
       console.log(idParam);
       this.fetchFilesService.get(this.id).subscribe(result => {
-        console.log('fetched data')
+        console.log('fetched data');
+        console.log(result);
         this.fileData = result;
         this.title = "file info";
+        console.log(this.fileData);
         //this.downloadUrl = environment.baseUrl+"file/download/"+this.fileData.id;
       }, error => {
         console.log(error);
@@ -78,6 +82,34 @@ export class FileDataComponent implements OnInit {
         console.log(error);
       })
     }
+  }
+
+  onCreateShortLink(){
+    if(this.fileData && this.fileData.isPublic){
+      this.fetchFilesService.createShortLink(this.fileData)
+        .subscribe(result => {
+          this.fileData = result;
+          console.log('short link created');
+        }, error => {
+          console.log(error);
+        })
+    }
+  }
+
+  onDeleteShortLink(){
+    if(this.fileData && this.fileData.shortLink){
+      this.fetchFilesService.deleteShortLink(this.fileData)
+        .subscribe(result => {
+          this.fileData = result;
+          console.log('short link deleted');
+        }, error => {
+          console.log(error);
+        })
+    }
+  }
+
+  onBack(){
+    this.location.back();
   }
 
 }

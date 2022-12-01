@@ -53,6 +53,21 @@ import { FileData } from './fileData';
         return this.http.put<FileData>(url, item);
       }
 
+      share(item: FileData, email: string): Observable<FileData>{
+        let url = this.getUrl("file/share/" + email);
+        return this.http.put<FileData>(url, item);
+      }
+
+      createShortLink(item: FileData): Observable<FileData>{
+        let url = this.getUrl("file/short/" + item.id);
+        return this.http.put<FileData>(url, item);
+      }
+
+      deleteShortLink(item: FileData): Observable<FileData>{
+        let url = this.getUrl("file/short/" + item.shortLink);
+        return this.http.delete<FileData>(url, { body : item});
+      }
+
       delete(item: FileData): Observable<FileData>{
         let url = this.getUrl("file/" + item.id);
         return this.http.delete<FileData>(url, { body: item });

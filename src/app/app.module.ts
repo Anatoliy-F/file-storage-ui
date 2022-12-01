@@ -15,6 +15,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { FileDataComponent } from './fetch-files/file-data/file-data.component';
+import { FileDataEditComponent } from './fetch-files/file-data-edit/file-data-edit.component';
+import { ShareFileComponent } from './fetch-files/share-file/share-file.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { FileDataComponent } from './fetch-files/file-data/file-data.component';
     LoginComponent,
     RegistrationComponent,
     FileDataComponent,
+    FileDataEditComponent,
+    ShareFileComponent,
   ],
   imports: [
     BrowserModule,

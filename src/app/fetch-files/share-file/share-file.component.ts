@@ -6,6 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Location } from '@angular/common';
 
 import { FileData } from '../fileData';
+import { User } from '../fileData';
 import { BaseFormComponent } from 'src/app/base-form.component';
 import { FetchFilesService } from '../fetch-files.service';
 
@@ -64,14 +65,23 @@ export class ShareFileComponent extends BaseFormComponent implements OnInit {
 
   onSubmit(){
     if(this.fileData && !this.fileData.viewers.find(i => i == this.form.controls['email'].value)){
-      this.fileData.viewers.push(this.form.controls['email'].value);
+      
+      let user: User = {
+        email: this.form.controls['email'].value,
+        concurrency: '',
+        name: '',
+        id: ''
+      }
+      //this.fileData.viewers.push(user);
 
       console.log('lets do it');
+      console.log(JSON.stringify(this.fileData));
 
       this.fetchFileService.share(this.fileData, this.form.controls['email'].value)
         .subscribe(result => {
-          this.fileData = result;
           console.log(result);
+          this.fileData = result;
+          
         }, error => {
           console.log(error);
         })

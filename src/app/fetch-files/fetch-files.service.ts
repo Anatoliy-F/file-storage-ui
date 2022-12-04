@@ -59,12 +59,12 @@ import { FileData } from './fileData';
       }
 
       createShortLink(item: FileData): Observable<FileData>{
-        let url = this.getUrl("file/short/" + item.id);
-        return this.http.put<FileData>(url, item);
+        let url = this.getUrl("shortlink/" + item.id);
+        return this.http.post<FileData>(url, item);
       }
 
       deleteShortLink(item: FileData): Observable<FileData>{
-        let url = this.getUrl("file/short/" + item.shortLink);
+        let url = this.getUrl("shortlink/" + item.shortLink);
         return this.http.delete<FileData>(url, { body : item});
       }
 

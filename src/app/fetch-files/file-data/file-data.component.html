@@ -16,7 +16,7 @@
         <mat-list>
             <div mat-subheader>Viewers</div>
             <mat-list-item *ngFor="let viewer of fileData.viewers">
-                {{viewer}}
+                {{viewer.name}} | {{viewer.email}}
             </mat-list-item>
         </mat-list>
     </mat-card-content>

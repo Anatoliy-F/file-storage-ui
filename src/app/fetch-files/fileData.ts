@@ -6,5 +6,12 @@ export interface FileData{
     uploadDateTime: string;
     isPublic: boolean;
     shortLink?: string;
-    viewers: string[];
+    viewers: User[];
+}
+
+export interface User{
+    id: string;
+    concurrency: string;
+    name: string;
+    email: string;
 }

@@ -88,7 +88,7 @@ export class FileDataComponent implements OnInit {
     if(this.fileData && this.fileData.isPublic){
       this.fetchFilesService.createShortLink(this.fileData)
         .subscribe(result => {
-          this.fileData = result;
+          this.fileData!.shortLink = result.link;
           console.log('short link created');
         }, error => {
           console.log(error);
@@ -100,7 +100,7 @@ export class FileDataComponent implements OnInit {
     if(this.fileData && this.fileData.shortLink){
       this.fetchFilesService.deleteShortLink(this.fileData)
         .subscribe(result => {
-          this.fileData = result;
+          this.fileData!.shortLink = '';
           console.log('short link deleted');
         }, error => {
           console.log(error);

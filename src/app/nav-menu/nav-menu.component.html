@@ -6,6 +6,9 @@
         <a mat-flat-button color="primary" [routerLink]="['/myFiles']">
             Fetch files
         </a>
+        <a mat-flat-button color="primary" [routerLink]="['/users']">
+            Users
+        </a>
         <span class="separator"></span>
         <a *ngIf="!isLoggedIn" mat-flat-button color="primary" [routerLink]="['/login']">
             Login

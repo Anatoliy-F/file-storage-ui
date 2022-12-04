@@ -7,7 +7,6 @@ import { LoginRequest } from './login-request';
 import { LoginResult } from './login-result';
 import { RegistrationRequest } from './registration-request';
 import { RegistrationResult } from './registration-result';
-import { InteractivityChecker } from '@angular/cdk/a11y';
 
 @Injectable({
     providedIn: 'root',

@@ -4,6 +4,7 @@ import { BaseService, ApiResult } from '../base.service';
 import { Observable } from 'rxjs';
 
 import { FileData } from './fileData';
+import { ShortLink } from './fileData';
 
 @Injectable({
     providedIn: 'root',
@@ -58,14 +59,14 @@ import { FileData } from './fileData';
         return this.http.put<FileData>(url, item);
       }
 
-      createShortLink(item: FileData): Observable<FileData>{
+      createShortLink(item: FileData): Observable<ShortLink>{
         let url = this.getUrl("shortlink/" + item.id);
-        return this.http.post<FileData>(url, item);
+        return this.http.post<ShortLink>(url, item);
       }
 
-      deleteShortLink(item: FileData): Observable<FileData>{
+      deleteShortLink(item: FileData): Observable<boolean>{
         let url = this.getUrl("shortlink/" + item.shortLink);
-        return this.http.delete<FileData>(url, { body : item});
+        return this.http.delete<boolean>(url, { body : item});
       }
 
       delete(item: FileData): Observable<FileData>{
@@ -78,5 +79,4 @@ import { FileData } from './fileData';
         let url = this.getUrl("file/download/" + id);
         return this.http.get(url, {responseType: "blob"});
       }
-
   }

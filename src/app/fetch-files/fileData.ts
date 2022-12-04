@@ -15,3 +15,9 @@ export interface User{
     name: string;
     email: string;
 }
+
+export interface ShortLink{
+    id: string;
+    link: string;
+    fileId: string;
+}

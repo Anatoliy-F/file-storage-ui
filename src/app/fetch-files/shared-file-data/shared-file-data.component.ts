@@ -6,29 +6,26 @@ import { map, takeUntil } from 'rxjs/operators';
 
 import { FileData } from '../fileData';
 import { FetchFilesService } from '../fetch-files.service';
-import { AppUserService } from 'src/app/manage-users/app-user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-file-data',
-  templateUrl: './file-data.component.html',
-  styleUrls: ['./file-data.component.scss']
+  selector: 'app-shared-file-data',
+  templateUrl: './shared-file-data.component.html',
+  styleUrls: ['./shared-file-data.component.scss']
 })
-export class FileDataComponent implements OnInit {
+export class SharedFileDataComponent implements OnInit {
 
   title = "Loading data, please wait..."
   //TODO: solve this
   file?: Blob;
   fileData?: FileData;
   id?: string;
-  addViewer: boolean = false;
   downloadUrl?: string
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private fetchFilesService: FetchFilesService,
-    private userService: AppUserService,
     private location: Location
   ) { }
 
@@ -45,7 +42,7 @@ export class FileDataComponent implements OnInit {
 
     if(this.id){
       console.log(idParam);
-      this.fetchFilesService.get(this.id).subscribe(result => {
+      this.fetchFilesService.getSharedFile(this.id).subscribe(result => {
         console.log('fetched data');
         console.log(result);
         this.fileData = result;
@@ -56,19 +53,6 @@ export class FileDataComponent implements OnInit {
         console.log(error);
         this.title = "Something went wrong";
       });
-    }
-  }
-
-  onDelete(){
-    if(this.id){
-      this.fileData!.viewers = [];
-      this.fetchFilesService.delete(this.fileData!)
-        .subscribe(result => {
-          this.router.navigate(['/myFiles']);
-        }, error => {
-          console.log(error);
-          this.title = "Something went wrong";
-        })
     }
   }
 
@@ -88,48 +72,16 @@ export class FileDataComponent implements OnInit {
     }
   }
 
-  onCreateShortLink(){
-    if(this.fileData && this.fileData.isPublic){
-      this.fetchFilesService.createShortLink(this.fileData)
+  onRefuse(){
+    if(this.id){
+      this.fetchFilesService.refuseShared(this.fileData!)
         .subscribe(result => {
-          this.fileData!.shortLink = result.link;
-          console.log('short link created');
+          this.router.navigate(['/shared']);
         }, error => {
           console.log(error);
+          this.title = "Something went wrong";
         })
     }
-  }
-
-  onDeleteShortLink(){
-    if(this.fileData && this.fileData.shortLink){
-      this.fetchFilesService.deleteShortLink(this.fileData)
-        .subscribe(result => {
-          this.fileData!.shortLink = '';
-          console.log('short link deleted');
-        }, error => {
-          console.log(error);
-        })
-    }
-  }
-
-  onAddViewer(viewer: string){
-    console.log(viewer);
-    this.userService.getByEmail(viewer)
-      .subscribe(result => {
-        console.log(result);
-        this.fileData?.viewers.push(result);
-      }, error => {
-        console.log(error);
-      })
-  }
-
-  onApplyChanges(){
-    this.fetchFilesService.put(this.fileData!)
-        .subscribe(result => {
-          console.log(result);
-        }, error => {
-          console.log(error);
-        })
   }
 
   onBack(){

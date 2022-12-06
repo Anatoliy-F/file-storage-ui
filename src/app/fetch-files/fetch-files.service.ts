@@ -49,6 +49,11 @@ import { ShortLink } from './fileData';
         return this.http.get<FileData>(url);
       }
 
+      getSharedFile(id: string): Observable<FileData>{
+        let url = this.getUrl("file/shared/" + id);
+        return this.http.get<FileData>(url);
+      }
+
       put(item: FileData): Observable<FileData>{
         let url = this.getUrl("file/" + item.id);
         return this.http.put<FileData>(url, item);
@@ -74,9 +79,39 @@ import { ShortLink } from './fileData';
         return this.http.delete<FileData>(url, { body: item });
       }
 
+      refuseShared(item: FileData): Observable<FileData>{
+        let url = this.getUrl("file/shared/" + item.id);
+        return this.http.delete<FileData>(url, { body: item});
+      }
+
       download(id: string): Observable<Blob>
       {
         let url = this.getUrl("file/download/" + id);
         return this.http.get(url, {responseType: "blob"});
       }
+
+      getShared(
+          pageIndex: number,
+          pageSize: number,
+          sortColumn: string,
+          sortOrder: string,
+          filterColumn: string | null,
+          filterQuery: string | null
+        ): Observable<ApiResult<FileData>> {
+          let url = this.getUrl("file/shared");
+  
+          let params = new HttpParams()
+          .set("pageIndex", pageIndex.toString())
+          .set("pageSize", pageSize.toString())
+          .set("sortColumn", sortColumn)
+          .set("sortOrder", sortOrder);
+    
+          if (filterColumn && filterQuery) {
+              params = params
+              .set("filterColumn", filterColumn)
+              .set("filterQuery", filterQuery);
+          }
+  
+          return this.http.get<ApiResult<FileData>>(url, { params })
+        }
   }

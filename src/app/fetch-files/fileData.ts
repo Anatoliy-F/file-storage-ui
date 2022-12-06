@@ -4,6 +4,7 @@ export interface FileData{
     note: string;
     size: number;
     uploadDateTime: string;
+    ownerName: string;
     isPublic: boolean;
     shortLink?: string;
     viewers: User[];

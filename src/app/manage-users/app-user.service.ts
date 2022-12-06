@@ -48,6 +48,12 @@ import { AppUser } from './app-user';
         return this.http.get<AppUser>(url);
       }
 
+      getByEmail(email: string): Observable<AppUser>
+      {
+        let url = this.getUrl("account/byEmail/" + email);
+        return this.http.get<AppUser>(url);
+      }
+
       put(item: AppUser): Observable<AppUser>{
         let url = this.getUrl("account/" + item.id);
         return this.http.put<AppUser>(url, item);

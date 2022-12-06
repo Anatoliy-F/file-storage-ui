@@ -10,6 +10,8 @@ import { FileDataEditComponent } from './fetch-files/file-data-edit/file-data-ed
 import { ShareFileComponent } from './fetch-files/share-file/share-file.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { UserEditComponent } from './manage-users/user-edit/user-edit.component';
+import { FetchSharedFilesComponent } from './fetch-files/fetch-shared-files/fetch-shared-files.component';
+import { SharedFileDataComponent } from './fetch-files/shared-file-data/shared-file-data.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -20,7 +22,9 @@ const routes: Routes = [
   {path: 'fileData/:id', component: FileDataComponent},
   {path: 'editFileData/:id', component: FileDataEditComponent},
   {path: 'shareFile/:id', component: ShareFileComponent},
-  {path: 'user/:id', component: UserEditComponent}
+  {path: 'user/:id', component: UserEditComponent},
+  {path: 'shared', component: FetchSharedFilesComponent},
+  {path: 'sharedFileData/:id', component: SharedFileDataComponent}
 ];
 
 @NgModule({

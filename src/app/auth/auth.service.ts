@@ -18,12 +18,17 @@ export class AuthService {
     ){}
 
     private tokenKey: string = "token";
+    private adminKey: string = "isAdmin";
 
     private _authStatus = new Subject<boolean>();
     public authStatus = this._authStatus.asObservable();
 
     isAuthenticated() : boolean {
         return this.getToken() !== null;
+    }
+
+    isAdmin() : boolean {
+        return (localStorage.getItem(this.adminKey) === "true");
     }
 
     getToken(): string | null {
@@ -38,11 +43,15 @@ export class AuthService {
                     localStorage.setItem(this.tokenKey, loginResult.token);
                     this.setAuthStatus(true);
                 }
+                if(loginResult.isAdmin){
+                    localStorage.setItem(this.adminKey, "true");
+                }
             }));
     }
 
     logout() {
         localStorage.removeItem(this.tokenKey);
+        localStorage.removeItem(this.adminKey);
         this.setAuthStatus(false);
     }
 

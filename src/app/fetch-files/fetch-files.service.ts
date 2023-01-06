@@ -60,7 +60,7 @@ import { ShortLink } from './fileData';
       }
 
       share(item: FileData, email: string): Observable<FileData>{
-        let url = this.getUrl("file/share/" + email);
+        let url = this.getUrl("file/shared/" + email);
         return this.http.put<FileData>(url, item);
       }
 

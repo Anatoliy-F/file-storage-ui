@@ -53,7 +53,8 @@ export class UploadComponent extends BaseFormComponent implements OnInit {
 
         this.http.post(environment.baseUrl + 'upload', formData)
             .subscribe(result => {
-                console.log('File is uploaded')
+                console.log('File is uploaded');
+                console.log(result);
             }, error => {
                 console.log(error);
             });
